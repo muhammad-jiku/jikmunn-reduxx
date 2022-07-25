@@ -1,3 +1,6 @@
+const redux = require('redux');
+const createStore = redux.createStore;
+
 //  actions
 const BUY_JERSEY = 'BUY_JERSEY';
 
@@ -26,3 +29,27 @@ const reducersForJersey = (state = initialState, action) => {
       return state;
   }
 };
+
+// store for redux:
+// 1. holds application states
+// 2. allows acces to get the states by getState()
+// 3. allows to update the states via dispatch method: dispatch(action)
+// 4. registes listener by subscribe method: subscribe(listener)
+// 5. handles unregistering of listeners by function returned by the subscribe method: subscribe(listener)
+// here is the demo
+
+const store = createStore(reducersForJersey); // 1st point :- here store holds state by accepting reducers
+
+console.log('getting intialState', store.getState()); // 2nd point
+
+store.subscribe(() => console.log('updated state', store.getState())); // 4th point
+
+store.dispatch(buyJersey()); // 3rd point
+store.dispatch(buyJersey()); // 3rd point
+store.dispatch(buyJersey()); // 3rd point
+store.dispatch(buyJersey()); // 3rd point
+
+const unsubscribe = store.subscribe(() =>
+  console.log('final updated state', store.getState())
+); // 5th point
+unsubscribe();
