@@ -3,6 +3,7 @@ const createStore = redux.createStore;
 
 //  actions
 const BUY_JERSEY = 'BUY_JERSEY';
+const BUY_KIT = 'BUY_KIT';
 
 // TO IMPLEMENT ACTIONS,  NEEDS TO CREATE ACTION CREATOR: FUNCTION
 
@@ -12,18 +13,38 @@ function buyJersey() {
     info: 'First redux action to buy jersey',
   };
 }
+function buyKit() {
+  return {
+    type: BUY_KIT,
+    info: 'First redux action to buy kit',
+  };
+}
 
 // reducers are basically used for changing states of application based on action. So here is the demo:
 // (previousStare, action) => newState | this is the structure
 
-const initialState = { numOfJersies: 500 };
+const initialJersyState = { numOfJersies: 500 };
+const initialKitState = { numOfKits: 800 };
 
-const reducersForJersey = (state = initialState, action) => {
+const reducersForJersey = (state = initialJersyState, action) => {
   switch (action.type) {
     case BUY_JERSEY:
       return {
         ...state, // here spread operator copying state values
         numOfJersies: state.numOfJersies - 3,
+      };
+
+    default:
+      return state;
+  }
+};
+
+const reducersForKit = (state = initialKitState, action) => {
+  switch (action.type) {
+    case BUY_KIT:
+      return {
+        ...state, // here spread operator copying state values
+        numOfKits: state.numOfKits - 6,
       };
     default:
       return state;
@@ -48,6 +69,9 @@ store.dispatch(buyJersey()); // 3rd point
 store.dispatch(buyJersey()); // 3rd point
 store.dispatch(buyJersey()); // 3rd point
 store.dispatch(buyJersey()); // 3rd point
+store.dispatch(buyKit()); // 3rd point
+store.dispatch(buyKit()); // 3rd point
+store.dispatch(buyKit()); // 3rd point
 
 const unsubscribe = store.subscribe(() =>
   console.log('final updated state', store.getState())
