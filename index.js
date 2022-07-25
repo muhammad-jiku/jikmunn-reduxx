@@ -11,6 +11,7 @@ function buyJersey() {
 }
 
 // reducers are basically used for changing states of application based on action. So here is the demo:
+// (previousStare, action) => newState | this is the structure
 
 const initialState = { numOfJersies: 500 };
 
