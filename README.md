@@ -1,2 +1,2 @@
-# jikmunn-redux
+
 # jikmunn-reduxx
