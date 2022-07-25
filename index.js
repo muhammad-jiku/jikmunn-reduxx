@@ -1,5 +1,6 @@
 const redux = require('redux');
 const createStore = redux.createStore;
+const combineReducers = redux.combineReducers;
 
 //  actions
 const BUY_JERSEY = 'BUY_JERSEY';
@@ -59,7 +60,12 @@ const reducersForKit = (state = initialKitState, action) => {
 // 5. handles unregistering of listeners by function returned by the subscribe method: subscribe(listener)
 // here is the demo
 
-const store = createStore(reducersForJersey); // 1st point :- here store holds state by accepting reducers
+const rootReducers = combineReducers({
+  // this method cmbine multiple reducers
+  jersey: reducersForJersey,
+  kit: reducersForKit,
+});
+const store = createStore(rootReducers); // 1st point :- here store holds state by accepting reducers
 
 console.log('getting intialState', store.getState()); // 2nd point
 
