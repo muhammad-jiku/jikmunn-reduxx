@@ -1,6 +1,12 @@
 const redux = require('redux');
+const reduxLogger = require('redux-logger');
+
 const createStore = redux.createStore;
 const combineReducers = redux.combineReducers;
+
+// middleware
+const applyMiddleware = redux.applyMiddleware;
+const logger = reduxLogger.createLogger();
 
 //  actions
 const BUY_JERSEY = 'BUY_JERSEY';
@@ -65,11 +71,13 @@ const rootReducers = combineReducers({
   jersey: reducersForJersey,
   kit: reducersForKit,
 });
-const store = createStore(rootReducers); // 1st point :- here store holds state by accepting reducers
+const store = createStore(rootReducers, applyMiddleware(logger)); // 1st point :- here store holds state by accepting reducers
 
 console.log('getting intialState', store.getState()); // 2nd point
 
-store.subscribe(() => console.log('updated state', store.getState())); // 4th point
+store.subscribe(() => {});
+
+//store.subscribe(() => console.log('updated state', store.getState())); // 4th point
 
 store.dispatch(buyJersey()); // 3rd point
 store.dispatch(buyJersey()); // 3rd point
